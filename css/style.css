@@ -1,0 +1,68 @@
+#app {
+  padding: 50px 15px;
+  font-family: Arial;
+}
+
+.header__logo {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: block;
+  font-size: 30px;
+  color: pink;
+  background: black;
+  text-align: center;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.header__logo:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#feed-loader {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 30px;
+}
+
+#feed-loader.hide {
+  display: none;
+}
+
+.author__name {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+.post__video {
+  text-align: center;
+}
+
+.author__avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hashtags {
+  padding: 0;
+}
+
+.hashtags li {
+  margin: 0 10px 5px 0;
+  display: inline-block;
+  background-color: lightblue;
+  color: white;
+  padding: 5px 10px;
+}
+
+.hashtags li::before {
+  content: "#";
+}
