@@ -1,5 +1,3 @@
-import { ApiAccess } from './api.js';
-
 getTrandingFeed();
 
 const feedSpinner = document.getElementById('feed-loader'),
@@ -16,13 +14,12 @@ function outputFeed(data) {
   if (data.length > 0) {
     hideFeedSpinner();
 
-    data.forEach(element => {
+    for (let i = 0; data.length <= 30 && i <= 30; i++) {
+      let element = data[i];
+
       // create video block
       let post = document.createElement('div');
-      post.classList.add('post')
-      post.classList.add('uk-padding-small')
-      post.classList.add('uk-margin')
-      post.classList.add('uk-box-shadow-medium')
+      post.classList.add(...['post', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium'])
 
       // create request object
       let xhr = new XMLHttpRequest();
@@ -33,7 +30,7 @@ function outputFeed(data) {
       // this function work after we get request
       xhr.onload = function () {
         if (xhr.status !== 200) { // if status not 200 - error
-          alert(`Error ${xhr.status}: ${xhr.statusText}`); 
+          alert(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
 
           // parse result to JSON
@@ -43,13 +40,13 @@ function outputFeed(data) {
 
           // add authors meta
           post.innerHTML += `<div class="author uk-flex uk-flex-middle uk-margin-bottom">
-            <a href="https://www.tiktok.com/@${element.authorMeta.name}" class="author__avatar">
-              <img
-                src="${element.authorMeta.avatar}"
-                alt="${element.authorMeta.name}">
-            </a>
-            <a href="https://www.tiktok.com/@${element.authorMeta.name}" class="author__name">${element.authorMeta.name}</a>
-          </div>`;
+              <a href="https://www.tiktok.com/@${element.authorMeta.name}" class="author__avatar">
+                <img
+                  src="${element.authorMeta.avatar}"
+                  alt="${element.authorMeta.name}">
+              </a>
+              <a href="https://www.tiktok.com/@${element.authorMeta.name}" class="author__name">${element.authorMeta.name}</a>
+            </div>`;
 
           // add hastags
           if (element.hashtags.length > 0) {
@@ -67,38 +64,41 @@ function outputFeed(data) {
 
           // add post meta
           post.innerHTML += `<div class="post__meta uk-flex uk-flex-between">
-          <p class="uk-margin-remove-top"><span uk-icon="comments"></span> ${element.commentCount}</p>
-          <p class="uk-margin-remove-top"><span uk-icon="heart"></span> ${element.diggCount}</p>
-        </div>
-          </div>`;
+            <p class="uk-margin-remove-top"><span uk-icon="comments"></span> ${element.commentCount}</p>
+            <p class="uk-margin-remove-top"><span uk-icon="heart"></span> ${element.diggCount}</p>
+              </div>
+            </div>`;
 
           // add post block to end of #app
           app.appendChild(post);
         }
       };
-    });
+    }
   }
 }
 
-// get feed data
 function getTrandingFeed() {
-  const data = null;
+  // get feed data
 
   const xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
 
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === this.DONE) {
-      console.log('Page TrandingFeed:')
-      console.log(JSON.parse(this.responseText));
-      // call function and give parsed in JSON respond to it
-      outputFeed(JSON.parse(this.responseText));
-    }
-  });
-
   xhr.open("GET", "https://tiktok33.p.rapidapi.com/trending/feed");
   xhr.setRequestHeader("x-rapidapi-host", "tiktok33.p.rapidapi.com");
-  xhr.setRequestHeader("x-rapidapi-key", ApiAccess.token);
+  xhr.setRequestHeader("x-rapidapi-key", "c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66");
 
-  xhr.send(data);
+  xhr.send();
+
+  xhr.onload = function () {
+    if (xhr.status !== 200) { // if status not 200 - error
+      alert(`Error ${xhr.status}: ${xhr.statusText}`);
+    } else {
+
+      // get result in JSON 
+      let result = JSON.parse(xhr.response);
+
+      // call function and give parsed in JSON respond to it
+      outputFeed(result);
+    }
+  }
 }
