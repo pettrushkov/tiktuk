@@ -1,25 +1,21 @@
+import { app, hideFeedSpinner } from './globalVars.js';
+
 getTrandingFeed();
-
-const feedSpinner = document.getElementById('feed-loader'),
-  app = document.getElementById('app');
-
-function hideFeedSpinner() {
-  if (!feedSpinner.classList.contains('hide')) {
-    feedSpinner.classList.add('hide');
-  }
-}
 
 function outputFeed(data) {
 
   if (data.length > 0) {
+
+    // hide spinner when get response with posts
     hideFeedSpinner();
 
+    // get first 30 item of array
     for (let i = 0; data.length <= 30 && i <= 30; i++) {
       let element = data[i];
 
       // create video block
       let post = document.createElement('div');
-      post.classList.add(...['post', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium'])
+      post.classList.add(...['post', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium']);
 
       // create request object
       let xhr = new XMLHttpRequest();
@@ -40,7 +36,7 @@ function outputFeed(data) {
 
           // add authors meta
           post.innerHTML += `<div class="author uk-flex uk-flex-middle uk-margin-bottom">
-              <a href="https://www.tiktok.com/@${element.authorMeta.name}" class="author__avatar">
+              <a href="https://www.tiktok.com/@${element.authorMeta.name}" class="avatar">
                 <img
                   src="${element.authorMeta.avatar}"
                   alt="${element.authorMeta.name}">
@@ -51,9 +47,7 @@ function outputFeed(data) {
           // add hastags
           if (element.hashtags.length > 0) {
             let hashtags = document.createElement('ul');
-            hashtags.classList.add('hashtags')
-            hashtags.classList.add('uk-flex')
-            hashtags.classList.add('uk-flex-wrap')
+            hashtags.classList.add(...['hashtags', 'uk-flex', 'uk-flex-wrap']);
 
             element.hashtags.forEach(tag => {
               hashtags.innerHTML += `<li>${tag.name}</li>`;
@@ -81,7 +75,6 @@ function getTrandingFeed() {
   // get feed data
 
   const xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
 
   xhr.open("GET", "https://tiktok33.p.rapidapi.com/trending/feed");
   xhr.setRequestHeader("x-rapidapi-host", "tiktok33.p.rapidapi.com");

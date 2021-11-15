@@ -22,14 +22,14 @@
   text-decoration: none;
 }
 
-#feed-loader {
+#loader {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   margin-top: 30px;
 }
 
-#feed-loader.hide {
+#loader.hide {
   display: none;
 }
 
@@ -44,11 +44,17 @@
   text-align: center;
 }
 
-.author__avatar img {
+.avatar img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  margin-right: 15px;
+}
+
+.avatar--thumb img {
+  width: 100px;
+  height: 100px;
 }
 
 .hashtags {
