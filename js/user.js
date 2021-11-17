@@ -1,4 +1,4 @@
-import { feedSpinner, app, hideFeedSpinner } from './globalVars.js';
+import { feedSpinner, app, hideFeedSpinner, APIkey } from './globalVars.js';
 
 getUserInfo();
 
@@ -7,11 +7,11 @@ function outPutUserInfo(data) {
   // hide spinner when get response with user info
   hideFeedSpinner();
 
-  console.log(data)
-
   // create user block
+  const userInfo = document.getElementById('user-info');
+
   let user = document.createElement('div');
-  user.classList.add(...['user', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium']);
+  user.classList.add('user', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium');
 
   user.innerHTML = `<div class="user__info uk-flex uk-flex-middle uk-margin-bottom">
       <div class="avatar avatar--thumb"><img src="${data.user.avatarThumb}" alt="${data.user.nickname}"></div>
@@ -36,7 +36,7 @@ function outPutUserInfo(data) {
       </div>
     </div>`;
 
-  app.appendChild(user);
+    userInfo.appendChild(user);
 }
 
 function getUserInfo() {
@@ -46,7 +46,7 @@ function getUserInfo() {
 
   xhr.open("GET", "https://tiktok33.p.rapidapi.com/user/info/dave.xp");
   xhr.setRequestHeader("x-rapidapi-host", "tiktok33.p.rapidapi.com");
-  xhr.setRequestHeader("x-rapidapi-key", "c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66");
+  xhr.setRequestHeader("x-rapidapi-key", APIkey);
 
   xhr.send();
 
