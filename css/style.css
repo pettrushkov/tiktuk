@@ -1,10 +1,11 @@
 #app {
-  padding: 50px 15px;
+  padding: 50px 15px 75px;
   font-family: Arial;
 }
 
-.header__logo {
+.header__logo, .footer {
   position: fixed;
+  z-index: 1;
   width: 100%;
   top: 0;
   left: 0;
@@ -71,4 +72,39 @@
 
 .hashtags li::before {
   content: "#";
+}
+
+.footer {
+  top: initial;
+  bottom: 0;
+}
+
+.footer__navigation {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.footer__navigation li {
+  margin: 0 10px;
+}
+
+.footer__navigation li:not(.active) {
+  opacity: 0.5;
+
+}
+
+.footer__navigation li a {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: pink;
+  font-size: 20px;
+}
+
+.footer__navigation li a span:nth-child(2) {
+  display: block;
 }
