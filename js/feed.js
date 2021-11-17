@@ -1,13 +1,12 @@
-import { app, hideFeedSpinner } from './globalVars.js';
+import { app, hideFeedSpinner, APIkey } from './globalVars.js';
 
 getTrandingFeed();
 
 function outputFeed(data) {
 
+  // hide spinner when get response
+  hideFeedSpinner();
   if (data.length > 0) {
-
-    // hide spinner when get response with posts
-    hideFeedSpinner();
 
     // get first 30 item of array
     for (let i = 0; data.length <= 30 && i <= 30; i++) {
@@ -15,7 +14,7 @@ function outputFeed(data) {
 
       // create video block
       let post = document.createElement('div');
-      post.classList.add(...['post', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium']);
+      post.classList.add('post', 'uk-padding-small', 'uk-margin', 'uk-box-shadow-medium');
 
       // create request object
       let xhr = new XMLHttpRequest();
@@ -47,7 +46,7 @@ function outputFeed(data) {
           // add hastags
           if (element.hashtags.length > 0) {
             let hashtags = document.createElement('ul');
-            hashtags.classList.add(...['hashtags', 'uk-flex', 'uk-flex-wrap']);
+            hashtags.classList.add('hashtags', 'uk-flex', 'uk-flex-wrap');
 
             element.hashtags.forEach(tag => {
               hashtags.innerHTML += `<li>${tag.name}</li>`;
@@ -69,6 +68,9 @@ function outputFeed(data) {
       };
     }
   }
+  else {
+    alert(`Sorry, but we don't have posts for you :(`);
+  }
 }
 
 function getTrandingFeed() {
@@ -78,7 +80,7 @@ function getTrandingFeed() {
 
   xhr.open("GET", "https://tiktok33.p.rapidapi.com/trending/feed");
   xhr.setRequestHeader("x-rapidapi-host", "tiktok33.p.rapidapi.com");
-  xhr.setRequestHeader("x-rapidapi-key", "c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66");
+  xhr.setRequestHeader("x-rapidapi-key", APIkey);
 
   xhr.send();
 
