@@ -1,5 +1,7 @@
 import { feedSpinner, app, hideFeedSpinner } from './globalVars.js';
 
+getUserInfo();
+
 function outPutUserInfo(data) {
 
   // hide spinner when get response with user info
@@ -13,7 +15,7 @@ function outPutUserInfo(data) {
 
   user.innerHTML = `<div class="user__info uk-flex uk-flex-middle uk-margin-bottom">
       <div class="avatar avatar--thumb"><img src="${data.user.avatarThumb}" alt="${data.user.nickname}"></div>
-      <div>
+      <div class="user__info-text">
       <p class="uk-text-center uk-text-bold uk-text-large">${data.user.uniqueId}<p>
         <div class="uk-flex uk-flex-between uk-text-center">
           <div>
@@ -37,10 +39,8 @@ function outPutUserInfo(data) {
   app.appendChild(user);
 }
 
-getUserInfo();
-
 function getUserInfo() {
-  // get feed data
+  // get user data
 
   const xhr = new XMLHttpRequest();
 

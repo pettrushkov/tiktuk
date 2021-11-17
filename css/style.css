@@ -58,6 +58,12 @@
   height: 100px;
 }
 
+.user__info-text {
+  width: calc(100% - 115px);
+}
+
+
+/* hashtags styles */
 .hashtags {
   padding: 0;
 }
@@ -74,6 +80,10 @@
   content: "#";
 }
 
+
+
+
+/* footer styles */
 .footer {
   top: initial;
   bottom: 0;
